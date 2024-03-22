@@ -1,0 +1,71 @@
+server:
+  port: 5050 #gateway监听端口
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848 #nacos注册地址
+    # 配置gateway网关服务
+    gateway:
+      routes:
+        #        - id: test_router01 #配置id，保证唯一即可
+        #          #当前配置完成的需求
+        #          #如果到网关的请求是http://localhost:5050/commodity/brand/list gateway通过断言
+        #          #最终将请求路由转发到http://localhost:9090/commodity/brand/list => url=uri+Path
+        #          uri: http://localhost:9090
+        #          predicates:
+        #            - Path=/commodity/brand/list
+        #        - id: test_router02
+        #          uri: https://news.baidu.com
+        #          predicates:
+        #            - Path=/guoji
+        - id: lmliving_service_route #配置id，保证唯一即可
+          #当前配置完成的需求
+          #- Path=/api/service/**匹配比- Path=/api/**精确，要放在前面，否则会报错
+          #如果到网关的请求是http://localhost:5050/api/service/??/??/?? gateway通过断言
+          #最终将请求路由转发到http://lmliving-service[注册到nacos的lmliving-service服务ip+端口]/??/??/?? => 这里进行了路径重写，再进行拼接
+          #lb:支持负载均衡。lmliving-service:注册到nacos的服务名
+          #因为我门要去掉断言到的Pαth的/api/service,所以会使用路径重写 这里的/api 用于断言
+          uri: lb://lmliving-service
+          predicates:
+            - Path=/api/service/**
+          filters:
+            #RewritePath=/api/service/(?<segment>.*), /$\{segment}表示将/api/service/(?<segment>.*),替换成/$\{segment},
+            #这里(?<segment>.*)表示/??/??/??
+            #(?<segment>.*)得到/??/??/??，$\{segment}表示写入/??/??/??
+            #最后得到http://lmliving-service/??/??/??
+            - RewritePath=/api/service/(?<segment>.*), /$\{segment}
+        - id: lmliving_commodity_route #配置id，保证唯一即可
+          #当前配置完成的需求
+          #- Path=/api/commodity/**匹配比- Path=/api/**精确，要放在前面，否则会报错
+          #如果到网关的请求是http://localhost:5050/api/commodity/??/??/?? gateway通过断言
+          #最终将请求路由转发到http://lmlinvg-commodity[注册到nacos的lmlinvg-commodity服务ip+端口]/??/??/?? => 这里进行了路径重写，再进行拼接
+          #lb:支持负载均衡。lmlinvg-commodity:注册到nacos的服务名
+          #因为我门要去掉断言到的Pαth的/api/commodity,所以会使用路径重写 这里的/api 用于断言
+          uri: lb://lmlinvg-commodity
+          predicates:
+            - Path=/api/commodity/**
+          filters:
+            #RewritePath=/api/(?<segment>.*), /$\{segment}表示将/api/(?<segment>.*),替换成/$\{segment},
+            #这里(?<segment>.*)表示/commodity/??/??/??
+            #(?<segment>.*)得到/commodity/??/??/??，$\{segment}表示写入/commodity/??/??/??
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+        - id: lmliving_renren_fast_route #配置id，保证唯一即可
+          #当前配置完成的需求
+          #如果到网关的请求是http://localhost:5050/api/??/??/?? gateway通过断言
+          #最终将请求路由转发到http://renren-fast[注册到nacos的renren-fast服务ip+端口]/renren-fast/??/??/?? => 这里进行了路径重写，再进行拼接
+          #lb:支持负载均衡。renren-fast:注册到nacos的服务名
+          #因为我门要去掉断言到的Pαth的/api,所以会使用路径重写 这里的/api 用于断言
+          uri: lb://renren-fast
+          predicates:
+            - Path=/api/**
+          filters:
+            #RewritePath=/api/(?<segment>.*), /renren-fast/$\{segment}表示将/api/(?<segment>.*)替换成/renren-fast/$\{segment}
+            #(?<segment>.*)得到/??/??/??，$\{segment}表示写入/??/??/??
+            - RewritePath=/api/(?<segment>.*), /renren-fast/$\{segment}
+        - id: lmliving_host_route #配置id，保证唯一即可
+          uri: lb://lmlinvg-commodity
+          predicates:
+            - Host=**.lmliving.com
+  application:
+    name: lmliving-gateway #注册到nacos的服务名

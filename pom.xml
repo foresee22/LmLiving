@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.lm.lmliving</groupId>
+  <artifactId>lmLiving</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>lmLiving</name>
+  <description>家居生活-集成聚合微服务模块</description>
+  <properties>
+    <java.version>1.8</java.version>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+  </properties>
+  <!-- <url>http://maven.apache.org</url> -->
+
+  <!--指定聚合管理的模块/微服务模块-->
+  <modules>
+    <module>LmLiving-Commodity</module>
+    <module>renren-fast</module>
+    <module>renren-generator</module>
+      <module>lmliving-common</module>
+      <module>lmliving-service</module>
+      <module>lmliving-gateway</module>
+      <module>lmliving-seckill</module>
+  </modules>
+</project>

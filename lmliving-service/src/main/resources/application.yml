@@ -1,0 +1,21 @@
+##这些配置放在了nacos配置中心（2-12行）
+#server:
+#  port: 7070
+##配置0SS
+#spring:
+#  cloud:
+#    alicloud:
+#      oss:
+#        endpoint: oss-cn-beijing.aliyuncs.com
+#        bucket: lmliving-10000
+#      access-key: LTAI5tLHkdCJEaAnAtsTAeB8
+#      secret-key: li91AhHVgVDjovqYkdfRiqG9MKyH7e
+
+
+
+
+#    nacos:
+#      discovery:
+#        server-addr: 192.168.0.10:8848
+#  application:
+#    name: lmliving-service

@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://192.168.56.100:3306/lmliving_commodity?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    alicloud:
+      oss:
+        endpoint: oss-cn-beijing.aliyuncs.com
+      access-key: LTAI5tLHkdCJEaAnAtsTAeB8
+      secret-key: li91AhHVgVDjovqYkdfRiqG9MKyH7e
+    #nacos配置
+    nacos:
+      discovery:
+        server-addr: 192.168.0.10:8848
+  #配置注册到nacos的名称
+  application:
+    name: lmlinvg-commodity
+  #1.关闭thymeleaf的缓存，这样当前端页面变化时，就可以看到效果
+  #2.在实际的生产环境，需要将cache设置trUe,开启缓存，提高效率
+  thymeleaf:
+    cache: false
+#配置mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto #配置主键自增
+      Logic-delete-value: 0 #逻辑删除值（默认是1，这里调整成自己的）
+      Logic-not-delete-value: 1 #逻辑未删除值（默认是0，这里调整成自己的）
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #配置sql日志输出

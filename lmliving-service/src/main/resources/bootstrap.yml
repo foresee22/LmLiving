@@ -1,0 +1,21 @@
+#用于指定nacos配置中心的一些信息，nacos相关的配置要保留，告诉项目要把项目注册到哪个nacos，去哪个nacos和nacos的哪个地方拉取配置
+#不然项目会找不到配置
+#项目启动时先加载bootstarp.yml,再加载application.yml
+#也可以用bootstarp.properties来配置
+spring:
+  application:
+    name: lmliving-service #注册到nacos的服务名
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.0.10:8848 #指定nacos服务注册和发现地址
+      config:
+        server-addr: 192.168.0.10:8848 #指定nacos配置中心地址
+        namespace: 1375c6de-33d1-42bb-9a9f-aede35b9b6a1 #指定获取配置信息的namespace
+        group: dev #指定namespace下的组，如果ext-config[0].group指定了，这里可以不用指定，也可以保留
+        #通过ext-config[?]来指定data-id和是否实时刷新获取的配置
+        #ext-config[0]表示第一组
+        ext-config[0]:
+          data-id: lmliving-service.yml
+          refresh: true
+          group: dev

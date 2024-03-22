@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/LmLiving-Commodity/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LmLiving-Commodity/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lmliving-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lmliving-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lmliving-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lmliving-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lmliving-seckill/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lmliving-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lmliving-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/renren-fast/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/renren-generator/src/main/java" charset="UTF-8" />
+  </component>
+</project>
