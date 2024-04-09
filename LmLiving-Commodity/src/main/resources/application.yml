@@ -8,8 +8,8 @@ spring:
     alicloud:
       oss:
         endpoint: oss-cn-beijing.aliyuncs.com
-      access-key: LTAI5tLHkdCJEaAnAtsTAeB8
-      secret-key: li91AhHVgVDjovqYkdfRiqG9MKyH7e
+      access-key: 
+      secret-key: 
     #nacos配置
     nacos:
       discovery:
